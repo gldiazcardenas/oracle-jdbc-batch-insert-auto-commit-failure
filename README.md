@@ -11,7 +11,7 @@ Running
 ./buildContainerImage.sh -x -v 18.4.0
 ``
 
-## Scenario 1 ##
+## Scenario 1: Using Spring JdbcTemplate (autoCommit = true) ##
 
 - Inserting 20 rows into a table:
   ```
@@ -31,12 +31,22 @@ Running
 
 ### Conclusion ###
 
-- Without explicitly calling autoCommit(false);
 - Inserting chunks of 5 elements at a time, batchSize=5, 4 iterations in total
 - Making the 8th element fail having text longer than 50 characters
-- The 6th and 7th element get inserted in the table.
 - The 2nd iteration gets aborted as soon as the 8th element is processed.
-- The 8th, 9th, and 10th elements are not inserted in the table.
+- 17 rows in total get inserted, the 6th and 7th element get inserted in the table.
 
 ![alt Result](https://github.com/gldiazcardenas/oracle-jdbc-batch-insert-auto-commit-failure/blob/main/scenario_1_table_result.png?raw=true)
+
+
+## Scenario 2: Using Spring JdbcTemplate (autoCommit = true) ##
+
+- Same conditions than scenario 1
+
+### Conclusion ###
+
+- Same situation than scenario 1
+- 17 rows in total get inserted.
+- The JdbcTemplate uses a connection inside that is different from the one is obtained at the beginning of the block.
+
 
