@@ -27,7 +27,7 @@ Running
 - Check what gets inserted in DB.
 
 
-![alt Swagger Welcome](https://github.com/gldiazcardenas/oracle-jdbc-batch-insert-auto-commit-failure/blob/main/scenario_1.png?raw=true)
+![alt Sceneario 1](https://github.com/gldiazcardenas/oracle-jdbc-batch-insert-auto-commit-failure/blob/main/scenario_1.png?raw=true)
 
 ### Conclusion ###
 
@@ -38,4 +38,5 @@ Running
 - The 2nd iteration gets aborted as soon as the 8th element is processed.
 - The 8th, 9th, and 10th elements are not inserted in the table.
 
+![alt Result](https://github.com/gldiazcardenas/oracle-jdbc-batch-insert-auto-commit-failure/blob/main/scenario_1_table_result.png?raw=true)
 
