@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Component
-public class Scenario2 implements Runnable {
+public class Scenario3 implements Runnable {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
     public void run() {
-        System.out.println("Running Scenario 2");
+        System.out.println("Running Scenario 3");
 
         String sql = "INSERT INTO BATCH_INSERT (ID,TEXT) VALUES (?,?)";
 
@@ -37,16 +37,27 @@ public class Scenario2 implements Runnable {
             conn = jdbcTemplate.getDataSource().getConnection();
             conn.setAutoCommit(false);
 
+            PreparedStatement ps = conn.prepareStatement(sql);
+
             for (List<Row> batchList : Lists.partition(rows, 5)) {
+                BatchPreparedStatementSetter setter = getPreparedStatementSetter(batchList);
                 int[] results = null;
+
+                for (int i = 0; i < batchList.size(); i++) {
+                    setter.setValues(ps, i);
+                    ps.addBatch();
+                }
+
                 try {
-                    results = jdbcTemplate.batchUpdate(sql, getPreparedStatementSetter(batchList));
+                    results = ps.executeBatch();
+
                     if (Ints.contains(results, Statement.EXECUTE_FAILED)) {
                         System.out.println("Some failed: " + Arrays.toString(results));
                     }
                     else {
                         System.out.println("Inserted correctly: " + IntStream.of(results).sum());
                     }
+
                     conn.commit();
                 }
                 catch (Exception e) {

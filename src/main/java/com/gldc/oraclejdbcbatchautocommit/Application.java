@@ -14,13 +14,16 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private Scenario2 scenario2;
 
+	@Autowired
+	private Scenario3 scenario3;
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
 	public void run(String... args) {
-		scenario2.run();
+		scenario3.run();
 	}
 
 }

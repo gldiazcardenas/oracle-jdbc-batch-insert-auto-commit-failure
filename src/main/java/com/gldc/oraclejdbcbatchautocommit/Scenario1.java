@@ -24,6 +24,8 @@ public class Scenario1 implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Running Scenario 1");
+
         String sql = "INSERT INTO BATCH_INSERT (ID,TEXT) VALUES (?,?)";
 
         List<Row> rows = getRows();
@@ -45,7 +47,7 @@ public class Scenario1 implements Runnable {
         }
 
         List<Row> insertedRows = jdbcTemplate.query("SELECT * FROM BATCH_INSERT", BeanPropertyRowMapper.newInstance(Row.class));
-        System.out.println("Inserted Rows: " + insertedRows.size());
+        System.out.println("Total rows inserted: " + insertedRows.size());
 
         jdbcTemplate.execute("DELETE FROM BATCH_INSERT");
     }
