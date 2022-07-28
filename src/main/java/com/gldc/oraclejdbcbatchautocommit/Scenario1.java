@@ -42,6 +42,7 @@ public class Scenario1 implements Runnable {
                 }
             }
             catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Failed: " + e.getLocalizedMessage() + ", results: " + Arrays.toString(results));
             }
         }

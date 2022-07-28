@@ -61,6 +61,7 @@ public class Scenario3 implements Runnable {
                     conn.commit();
                 }
                 catch (Exception e) {
+                    e.printStackTrace();
                     conn.rollback();
                     System.out.println("Failed: " + e.getLocalizedMessage() + ", results: " + Arrays.toString(results));
                 }
