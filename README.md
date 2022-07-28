@@ -26,6 +26,9 @@ Running
 - Make the 8th item having TEXT longer than 50 chars.
 - Check what gets inserted in DB.
 
+
+![alt Swagger Welcome](https://github.com/gldiazcardenas/oracle-jdbc-batch-insert-auto-commit-failure/blob/main/scenario_1.png?raw=true)
+
 ### Conclusion ###
 
 - Without explicitly calling autoCommit(false);
